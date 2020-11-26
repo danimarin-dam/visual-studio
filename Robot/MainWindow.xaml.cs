@@ -116,20 +116,20 @@ namespace Robot
             // Determina que el robot torni pel costat contrari al que ha sortit.
             if (posicioActualRobot.X < 10 && direccio == (int)DIRECCIO.OEST)
             {
-                posicioActualRobot.X = 500;
-                posicioActualFlecha.X = 540;
+                posicioActualRobot.X = 400;
+                posicioActualFlecha.X = 440;
             }
-            else if (posicioActualRobot.X > 480 && direccio == (int)DIRECCIO.EST)
+            else if (posicioActualRobot.X > 380 && direccio == (int)DIRECCIO.EST)
             {
                 posicioActualRobot.X = -10;
                 posicioActualFlecha.X = 30;
             }
             else if (posicioActualRobot.Y < 10 && direccio == (int)DIRECCIO.NORD)
             {
-                posicioActualRobot.Y = 500;
-                posicioActualFlecha.Y = 540;
+                posicioActualRobot.Y = 400;
+                posicioActualFlecha.Y = 440;
             }
-            else if (posicioActualRobot.Y > 480 && direccio == (int)DIRECCIO.SUD)
+            else if (posicioActualRobot.Y > 380 && direccio == (int)DIRECCIO.SUD)
             {
                 posicioActualRobot.Y = -10;
                 posicioActualFlecha.Y = 30;
