@@ -52,7 +52,7 @@ namespace Robot
             imgFlecha.ImageSource = new BitmapImage(new Uri(flechaDireccio, UriKind.Relative));
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
-            TimeSpan velocitat = new TimeSpan(100000);
+            TimeSpan velocitat = new TimeSpan(1000000);
             timer.Interval = velocitat;
             timer.Start();
             pintaRobot(puntIniciRobot);
