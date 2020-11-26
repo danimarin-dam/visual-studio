@@ -22,6 +22,7 @@ namespace Robot
     public partial class MainWindow : Window
     {
         Point tresor;
+        int moviments = 0;
         ImageBrush imatgeRobot = new ImageBrush();
         ImageBrush imatgeTresor = new ImageBrush();
         ImageBrush imgFlecha = new ImageBrush();
@@ -51,7 +52,7 @@ namespace Robot
             imgFlecha.ImageSource = new BitmapImage(new Uri(flechaDireccio, UriKind.Relative));
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
-            TimeSpan velocitat = new TimeSpan(800000);
+            TimeSpan velocitat = new TimeSpan(100000);
             timer.Interval = velocitat;
             timer.Start();
             pintaRobot(puntIniciRobot);
@@ -166,6 +167,7 @@ namespace Robot
                         pintaFlecha(posicioActualFlecha);
                         break;
                 }
+                moviments++;
             }
             if ((Math.Abs(tresor.X - posicioActualRobot.X) < tamanyRobot) &&
                 (Math.Abs(tresor.Y - posicioActualRobot.Y) < tamanyRobot))
@@ -212,7 +214,7 @@ namespace Robot
         }
         private void GameOver()
         {
-            MessageBox.Show("Has guanyat!");
+            MessageBox.Show("Has guanyat! \n" + "Moviments totals: " + moviments);
             this.Close();
         }
     }
