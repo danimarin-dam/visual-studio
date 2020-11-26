@@ -22,6 +22,7 @@ namespace Robot
     public partial class MainWindow : Window
     {
         Point tresor;
+        int moviments = 0;
         ImageBrush imatgeRobot = new ImageBrush();
         ImageBrush imatgeTresor = new ImageBrush();
         Brush snakeColor = Brushes.Green;
@@ -47,7 +48,7 @@ namespace Robot
             imatgeTresor.ImageSource = new BitmapImage(new Uri("tresor.png", UriKind.Relative));
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
-            TimeSpan velocitat = new TimeSpan(800000);
+            TimeSpan velocitat = new TimeSpan(100000);
             timer.Interval = velocitat;
             timer.Start();
             pintaSnake(puntInici);
@@ -122,6 +123,7 @@ namespace Robot
                         pintaSnake(posicioActual);
                         break;
                 }
+                moviments++;
             }
             if ((Math.Abs(tresor.X - posicioActual.X) < tamanySnake) &&
                 (Math.Abs(tresor.Y - posicioActual.Y) < tamanySnake))
@@ -166,7 +168,7 @@ namespace Robot
         }
         private void GameOver()
         {
-            MessageBox.Show("Has guanyat!");
+            MessageBox.Show("Has guanyat! \n" + "Moviments totals: " + moviments);
             this.Close();
         }
     }
