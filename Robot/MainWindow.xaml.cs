@@ -36,7 +36,7 @@ namespace Robot
         Point posicioActual = new Point();
         int direccio = 2;
         int direccioPrevia = 2;
-        int tamanySnake = 100;
+        int tamanyRobot = 100;
         int llargada = 1;
         int punts = 0;
         Random rnd = new Random();
@@ -50,45 +50,45 @@ namespace Robot
             TimeSpan velocitat = new TimeSpan(800000);
             timer.Interval = velocitat;
             timer.Start();
-            pintaSnake(puntInici);
+            pintaRobot(puntInici);
             posicioActual = puntInici;
-            pintaPomes(0);
+            pintaTresor(0);
         }
-        private void pintaSnake(Point posicio)
+        private void pintaRobot(Point posicio)
         {
 
-            Ellipse newEllipse = new Ellipse();
-            newEllipse.Fill = imatgeRobot;
-            newEllipse.Width = tamanySnake;
-            newEllipse.Height = tamanySnake;
+            Ellipse robot = new Ellipse();
+            robot.Fill = imatgeRobot;
+            robot.Width = tamanyRobot;
+            robot.Height = tamanyRobot;
 
-            Canvas.SetTop(newEllipse, posicio.Y);
-            Canvas.SetLeft(newEllipse, posicio.X);
+            Canvas.SetTop(robot, posicio.Y);
+            Canvas.SetLeft(robot, posicio.X);
 
-            paintCanvas.Children.Add(newEllipse);
+            paintCanvas.Children.Add(robot);
 
             if (paintCanvas.Children.Count - 1 > llargada)
             {
                 paintCanvas.Children.RemoveAt(paintCanvas.Children.Count - (llargada + 1));
             }
         }
-        private void pintaPomes(int index)
+        private void pintaTresor(int index)
         {
-            Point bonusPoint = new Point(0,0);
-            tresor = bonusPoint;
+            Point puntTresor = new Point(0,0);
+            tresor = puntTresor;
 
-            Ellipse newEllipse = new Ellipse();
-            newEllipse.Fill = imatgeTresor;
-            newEllipse.Width = tamanySnake;
-            newEllipse.Height = tamanySnake;
+            Ellipse tresorElipse = new Ellipse();
+            tresorElipse.Fill = imatgeTresor;
+            tresorElipse.Width = tamanyRobot;
+            tresorElipse.Height = tamanyRobot;
 
-            Canvas.SetTop(newEllipse, bonusPoint.Y);
-            Canvas.SetLeft(newEllipse, bonusPoint.X);
-            paintCanvas.Children.Insert(index, newEllipse);
+            Canvas.SetTop(tresorElipse, puntTresor.Y);
+            Canvas.SetLeft(tresorElipse, puntTresor.X);
+            paintCanvas.Children.Insert(index, tresorElipse);
         }
         private void timer_Tick(object sender, EventArgs e)
         {
-            // Determina que la snake torni pel costat contrari al que ha sortit.
+            // Determina que el robot torni pel costat contrari al que ha sortit.
             if (posicioActual.X < 10 && direccio == (int)DIRECCIO.OEST)
                 posicioActual.X = 500;
             else if (posicioActual.X > 480 && direccio == (int)DIRECCIO.EST)
@@ -99,7 +99,7 @@ namespace Robot
                 posicioActual.Y = -10;
 
             Moviment();
-            // Mou el cap de la serp en la direccio del moviment.
+            // Mou el robot en la direccio del moviment.
             Random r = new Random();
             if (r.Next(0, 2) == 1)
             {
@@ -107,29 +107,29 @@ namespace Robot
                 {
                     case (int)DIRECCIO.SUD:
                         posicioActual.Y += 50;
-                        pintaSnake(posicioActual);
+                        pintaRobot(posicioActual);
                         break;
                     case (int)DIRECCIO.NORD:
                         posicioActual.Y -= 50;
-                        pintaSnake(posicioActual);
+                        pintaRobot(posicioActual);
                         break;
                     case (int)DIRECCIO.OEST:
                         posicioActual.X -= 50;
-                        pintaSnake(posicioActual);
+                        pintaRobot(posicioActual);
                         break;
                     case (int)DIRECCIO.EST:
                         posicioActual.X += 50;
-                        pintaSnake(posicioActual);
+                        pintaRobot(posicioActual);
                         break;
                 }
             }
-            if ((Math.Abs(tresor.X - posicioActual.X) < tamanySnake) &&
-                (Math.Abs(tresor.Y - posicioActual.Y) < tamanySnake))
+            if ((Math.Abs(tresor.X - posicioActual.X) < tamanyRobot) &&
+                (Math.Abs(tresor.Y - posicioActual.Y) < tamanyRobot))
             {
                 GameOver();
             }
         }
-        private void Moviment()
+        private void Moviment() //Determina de manera random quan el robot es mou.
         {
             int moneda;
             Random rnd = new Random();
